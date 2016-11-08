@@ -1,7 +1,7 @@
 ---
 - src: https://github.com/angstwad/docker.ubuntu
   name: angstwad.docker_ubuntu
-  version: v1.1.7
+  version: v2.0
 - src: https://github.com/dev-sec/ansible-ssh-hardening
   name: dev-sec.ssh-hardening
   version: 3.2.0
