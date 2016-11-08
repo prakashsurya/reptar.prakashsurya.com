@@ -1,0 +1,34 @@
+---
+- name: assert supported distribution
+  assert:
+    that:
+      - ansible_distribution == 'Ubuntu'
+
+- name: install zfs package
+  apt:
+    name: zfs
+    state: present
+
+- name: copy zfs vdev_id configuration file
+  copy:
+    src: etc/zfs/vdev_id.conf
+    dest: /etc/zfs/vdev_id.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: udevadm trigger
+
+- name: enable zfs systemd service
+  service:
+    name: zfs.target
+    state: started
+    enabled: yes
+
+- name: configure zfs dataset properties
+  zfs:
+    name: zfs
+    state: present
+    mountpoint: /zfs
+    canmount: on
+    checksum: sha256
+    compression: lz4

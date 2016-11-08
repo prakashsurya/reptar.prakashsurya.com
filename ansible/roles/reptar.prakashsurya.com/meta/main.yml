@@ -1,0 +1,4 @@
+---
+dependencies:
+  - role: angstwad.docker_ubuntu
+    docker_opts: --storage-driver=devicemapper

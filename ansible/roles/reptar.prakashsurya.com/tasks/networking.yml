@@ -1,0 +1,23 @@
+---
+- name: copy networking configuration files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - src: etc/network/interfaces
+      dest: /etc/network/interfaces
+    - src: etc/hosts
+      dest: /etc/hosts
+    - src: etc/hostname
+      dest: /etc/hostname
+  notify:
+    - restart networking
+
+- name: enable networking service
+  service:
+    name: networking
+    enabled: yes
+    state: started

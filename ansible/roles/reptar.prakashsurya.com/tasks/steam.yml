@@ -1,0 +1,30 @@
+---
+- name: enable multiverse repository
+  apt_repository:
+    repo: "{{item}}"
+  with_items:
+    - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
+    - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
+  register: multiverse
+
+- name: update apt cache
+  apt:
+    update_cache: true
+  when: multiverse.changed
+
+#
+# This package requires the acceptance of a EULA during the installation
+# process. For now, this will fail until the package is manually
+# installed and the EULA is accepted at that time. There probably is a
+# way to automate the acceptance of the EULA, but I'm not sure how to
+# set that up.
+#
+- name: install steam package
+  apt:
+    name: steam
+    state: present
+
+- name: install nvidia drivers
+  apt:
+    name: nvidia-340
+    state: present

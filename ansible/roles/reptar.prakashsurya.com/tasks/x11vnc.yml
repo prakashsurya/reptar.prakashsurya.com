@@ -1,0 +1,22 @@
+---
+- name: install x11vnc package
+  apt:
+    name: x11vnc
+    state: present
+
+- name: copy systemd service file
+  copy:
+    src: etc/systemd/system/x11vnc.service
+    dest: /etc/systemd/system/x11vnc.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - daemon reload
+    - restart x11vnc
+
+- name: enable x11vnc service
+  service:
+    name: x11vnc
+    enabled: yes
+    state: started

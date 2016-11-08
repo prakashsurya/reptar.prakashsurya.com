@@ -1,0 +1,12 @@
+---
+- name: install various packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - curl
+    - git
+    - htop
+    - lm-sensors
+    - sysstat
+    - vim

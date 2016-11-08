@@ -1,0 +1,10 @@
+---
+- include: networking.yml
+- include: pkgs.yml
+- include: steam.yml
+- include: users.yml
+- include: x11vnc.yml
+- include: xubuntu.yml
+- include: zfs.yml
+- include: authorized_keys.yml # depends on users.yml
+- include: docker.yml # depends on users.yml

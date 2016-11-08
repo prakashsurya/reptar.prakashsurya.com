@@ -1,0 +1,7 @@
+---
+- name: configure authorized_keys for users
+  authorized_key:
+    key: "{{ item.key }}"
+    user: "{{ item.user }}"
+  with_items: "{{ authorized_keys }}"
+  when: authorized_keys is defined

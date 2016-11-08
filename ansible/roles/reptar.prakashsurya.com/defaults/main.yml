@@ -1,0 +1,15 @@
+---
+users:
+  - name: ps
+    system: no
+    shell: /bin/bash
+  - name: steamuser
+    system: no
+    shell: /bin/bash
+
+authorized_keys:
+  - user: ps
+    key: https://github.com/prakashsurya.keys
+
+docker_users:
+  - ps

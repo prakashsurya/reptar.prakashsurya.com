@@ -1,0 +1,21 @@
+---
+- name: udevadm trigger
+  command: udevadm trigger
+
+- name: daemon reload
+  command: systemctl daemon-reload
+
+- name: restart x11vnc
+  service:
+    name: x11vnc
+    state: restarted
+
+- name: restart lightdm
+  service:
+    name: lightdm
+    state: restarted
+
+- name: restart networking
+  service:
+    name: networking
+    state: restarted

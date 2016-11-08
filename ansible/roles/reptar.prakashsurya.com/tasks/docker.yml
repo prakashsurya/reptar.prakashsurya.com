@@ -1,0 +1,172 @@
+---
+#
+# Note, we rely on the "angstwad.docker_ubuntu" dependency to ensure the
+# docker package is installed and properly configured. As such, we don't
+# do any package installation or configuration in this file.
+#
+
+- name: create docker group
+  group:
+    name: docker
+    system: yes
+
+#
+# The various docker volumes are owned by UID 993 and GID 100. The
+# following two tasks are to ensure we have these UID and GID numbers
+# mapped to the correct user and group names.
+#
+- name: create docker user
+  user:
+    name: docker
+    system: yes
+    group: users
+    shell: /usr/sbin/nologin
+    uid: 993
+
+- name: create users group
+  group:
+    name: users
+    system: yes
+    gid: 100
+
+#
+# For the users specified, we add the "docker" group to allow that user
+# to run Docker commands without the need to use "sudo". Additionally,
+# we add the "users" group so these users have read access to the docker
+# volumes that will be mounted in the various containers.
+#
+- name: add docker groups to specified users
+  user:
+    name: "{{ item }}"
+    append: yes
+    groups: docker,users
+  with_items: "{{ docker_users }}"
+  when: docker_users is defined
+
+- name: create root docker dataset
+  zfs:
+    name: zfs/docker
+    mountpoint: /opt/docker
+    state: present
+
+- name: create docker host-data dataset
+  zfs:
+    name: zfs/docker/host-data
+    mountpoint: /var/lib/docker
+    state: present
+
+- name: create docker sub-datasets
+  zfs:
+    name: "zfs/docker/{{ item }}"
+    state: present
+  with_items:
+    - apps
+    - apps/couchpotato
+    - apps/nzbget
+    - apps/plex
+    - apps/sonarr
+    - downloads
+    - import
+    - movies
+    - tvshows
+
+- name: configure permissions for docker sub-datasets
+  file:
+    path: "/opt/docker/{{ item }}"
+    state: directory
+    owner: docker
+    group: users
+  with_items:
+    - apps
+    - apps/couchpotato
+    - apps/nzbget
+    - apps/plex
+    - apps/sonarr
+    - downloads
+    - import
+    - movies
+    - tvshows
+
+- name: create and run nzbget docker container
+  docker_container:
+    name: nzbget
+    image: linuxserver/nzbget
+    state: started
+    restart_policy: always
+    ports:
+      - "6789:6789"
+    volumes:
+      - "/opt/docker/downloads:/downloads"
+      - "/opt/docker/apps/nzbget:/config"
+    env:
+      VIRTUAL_HOST: nzbget.prakashsurya.com
+      PUID: 993
+      PGID: 100
+
+- name: create and run sonarr docker container
+  docker_container:
+    name: sonarr
+    image: linuxserver/sonarr
+    state: started
+    restart_policy: always
+    ports:
+      - "8989:8989"
+    volumes:
+      - "/opt/docker/downloads:/downloads"
+      - "/opt/docker/import:/import"
+      - "/opt/docker/tvshows:/tv"
+      - "/opt/docker/apps/sonarr:/config"
+    env:
+      VIRTUAL_HOST: sonarr.prakashsurya.com
+      PUID: 993
+      PGID: 100
+
+- name: create and run couchpotato docker container
+  docker_container:
+    name: couchpotato
+    image: linuxserver/couchpotato
+    state: started
+    restart_policy: always
+    ports:
+      - "5050:5050"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "/opt/docker/downloads:/downloads"
+      - "/opt/docker/movies:/movies"
+      - "/opt/docker/apps/couchpotato:/config"
+    env:
+      VIRTUAL_HOST: couchpotato.prakashsurya.com
+      PUID: 993
+      PGID: 100
+
+- name: create and run nginx-proxy docker container
+  docker_container:
+    name: nginx-proxy
+    image: jwilder/nginx-proxy
+    state: started
+    restart_policy: always
+    ports:
+      - "80:80"
+    volumes:
+      - "/var/run/docker.sock:/tmp/docker.sock:ro"
+
+#
+# Note, the following container uses the "host" network. As a result, it
+# doesn't need to use the nginx reverse proxy, and we don't specify the
+# VIRTUAL_HOST environment variable for them.
+#
+- name: create and run plex docker container
+  docker_container:
+    name: plex
+    image: linuxserver/plex
+    state: started
+    restart_policy: always
+    network_mode: host
+    volumes:
+      - "/opt/docker/apps/plex:/config"
+      - "/opt/docker/tvshows:/data/tvshows:ro"
+      - "/opt/docker/movies:/data/movies:ro"
+    env:
+      VERSION: latest
+      PUID: 993
+      PGID: 100
