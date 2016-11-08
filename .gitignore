@@ -1,1 +1,2 @@
 ansible/roles/angstwad.docker_ubuntu
+ansible/roles/dev-sec.ssh-hardening
