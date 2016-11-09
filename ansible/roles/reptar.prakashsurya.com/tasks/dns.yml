@@ -1,0 +1,31 @@
+---
+- name: install bind9 packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bind9
+    - bind9utils
+    - bind9-doc
+
+- name: enable bind9 service
+  service:
+    name: bind9
+    enabled: yes
+    state: started
+
+- name: copy bind9 configuration file
+  copy:
+    src: "{{ item }}"
+    dest: "/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - etc/default/bind9
+    - etc/bind/named.conf.options
+    - etc/bind/named.conf.local
+    - etc/bind/db.home.prakashsurya.com
+    - etc/bind/db.192.168.1
+  notify:
+    - restart bind9

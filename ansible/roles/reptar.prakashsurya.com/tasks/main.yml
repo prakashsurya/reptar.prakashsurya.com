@@ -1,5 +1,6 @@
 ---
 - include: cloudflare_ddns.yml
+- include: dns.yml
 - include: networking.yml
 - include: pkgs.yml
 - include: steam.yml

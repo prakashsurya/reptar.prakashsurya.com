@@ -99,7 +99,7 @@
       - "/opt/docker/downloads:/downloads"
       - "/opt/docker/apps/nzbget:/config"
     env:
-      VIRTUAL_HOST: nzbget.prakashsurya.com
+      VIRTUAL_HOST: nzbget.home.prakashsurya.com
       PUID: 993
       PGID: 100
 
@@ -117,7 +117,7 @@
       - "/opt/docker/tvshows:/tv"
       - "/opt/docker/apps/sonarr:/config"
     env:
-      VIRTUAL_HOST: sonarr.prakashsurya.com
+      VIRTUAL_HOST: sonarr.home.prakashsurya.com
       PUID: 993
       PGID: 100
 
@@ -135,7 +135,7 @@
       - "/opt/docker/movies:/movies"
       - "/opt/docker/apps/couchpotato:/config"
     env:
-      VIRTUAL_HOST: couchpotato.prakashsurya.com
+      VIRTUAL_HOST: couchpotato.home.prakashsurya.com
       PUID: 993
       PGID: 100
 
