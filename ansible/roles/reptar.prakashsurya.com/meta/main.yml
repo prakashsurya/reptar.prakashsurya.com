@@ -6,3 +6,7 @@ dependencies:
     ssh_allow_users: ps
     ssh_print_motd: true
     ssh_print_last_log: true
+  - role: jnv.unattended-upgrades
+    unattended_package_blacklist: []
+    unattended_automatic_reboot: true
+    unattended_remove_unused_dependencies: true
