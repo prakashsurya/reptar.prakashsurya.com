@@ -10,3 +10,11 @@ dependencies:
     unattended_package_blacklist: []
     unattended_automatic_reboot: true
     unattended_remove_unused_dependencies: true
+  - role: tersmitten.fail2ban
+    fail2ban_services:
+      - name: ssh
+        enabled: true
+        port: ssh
+        filter: sshd
+        logpath: /var/log/auth.log
+        maxretry: 6

@@ -8,3 +8,6 @@
 - src: https://github.com/jnv/ansible-role-unattended-upgrades
   name: jnv.unattended-upgrades
   version: v1.3.0
+- src: https://github.com/Oefenweb/ansible-fail2ban.git
+  name: tersmitten.fail2ban
+  version: v2.0.0
