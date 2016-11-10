@@ -69,6 +69,7 @@
     - import
     - movies
     - tvshows
+    - youtube
 
 - name: configure permissions for docker sub-datasets
   file:
@@ -86,6 +87,7 @@
     - import
     - movies
     - tvshows
+    - youtube
 
 - name: create and run nzbget docker container
   docker_container:
@@ -166,6 +168,7 @@
       - "/opt/docker/apps/plex:/config"
       - "/opt/docker/tvshows:/data/tvshows:ro"
       - "/opt/docker/movies:/data/movies:ro"
+      - "/opt/docker/youtube:/data/youtube:ro"
     env:
       VERSION: latest
       PUID: 993
