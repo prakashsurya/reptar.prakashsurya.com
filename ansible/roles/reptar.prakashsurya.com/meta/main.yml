@@ -19,12 +19,13 @@ dependencies:
         logpath: /var/log/auth.log
         maxretry: 6
   - role: franklinkim.ufw
-    ufw_default_input_policy: ACCEPT
+    ufw_default_input_policy: DROP
     ufw_default_output_policy: ACCEPT
     ufw_default_forward_policy: ACCEPT
     ufw_state: enabled
     ufw_logging: off
     ufw_reset: yes
     ufw_rules:
-      - from_ip: 191.98.163.0/25
-        rule: deny
+      - { rule: allow, port: 22 }
+      - { rule: allow, from_ip: 192.168.1.0/24 }
+      - { rule: deny, from_ip: 191.98.163.0/25 }
