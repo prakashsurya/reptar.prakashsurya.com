@@ -25,3 +25,6 @@ dependencies:
     ufw_state: enabled
     ufw_logging: off
     ufw_reset: yes
+    ufw_rules:
+      - from_ip: 191.98.163.0/25
+        rule: deny
