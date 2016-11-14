@@ -11,3 +11,6 @@
 - src: https://github.com/Oefenweb/ansible-fail2ban.git
   name: tersmitten.fail2ban
   version: v2.0.0
+- src: https://github.com/weareinteractive/ansible-ufw.git
+  name: franklinkim.ufw
+  version: 1.6.0

@@ -18,3 +18,10 @@ dependencies:
         filter: sshd
         logpath: /var/log/auth.log
         maxretry: 6
+  - role: franklinkim.ufw
+    ufw_default_input_policy: ACCEPT
+    ufw_default_output_policy: ACCEPT
+    ufw_default_forward_policy: ACCEPT
+    ufw_state: enabled
+    ufw_logging: off
+    ufw_reset: yes
