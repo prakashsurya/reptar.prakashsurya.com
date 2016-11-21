@@ -1,0 +1,20 @@
+---
+- name: create git datasets
+  zfs:
+    name: "zfs/{{ item }}"
+    mountpoint: "/opt/{{ item }}"
+    state: present
+  with_items:
+    - git
+    - git-archive
+
+- name: configure permissions for git datasets
+  file:
+    path: "/opt/{{ item }}"
+    state: directory
+    owner: git
+    group: git
+    mode: 0755
+  with_items:
+    - git
+    - git-archive

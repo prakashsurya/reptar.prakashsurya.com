@@ -3,7 +3,7 @@ dependencies:
   - role: angstwad.docker_ubuntu
     docker_opts: --storage-driver=devicemapper
   - role: dev-sec.ssh-hardening
-    ssh_allow_users: ps
+    ssh_allow_users: 'ps git'
     ssh_print_motd: true
     ssh_print_last_log: true
   - role: jnv.unattended-upgrades

@@ -6,9 +6,14 @@ users:
   - name: steamuser
     system: no
     shell: /bin/bash
+  - name: git
+    system: yes
+    shell: /usr/bin/git-shell
 
 authorized_keys:
   - user: ps
+    key: https://github.com/prakashsurya.keys
+  - user: git
     key: https://github.com/prakashsurya.keys
 
 docker_users:
