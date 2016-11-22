@@ -12,4 +12,4 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-ansible-playbook $TOP/ansible/playbook.yml
+ansible-playbook -i $TOP/ansible/inventory $TOP/ansible/playbook.yml
