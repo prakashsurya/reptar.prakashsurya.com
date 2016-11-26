@@ -26,6 +26,7 @@ dependencies:
     ufw_logging: off
     ufw_reset: yes
     ufw_rules:
+      - { rule: allow, port: 21 }
       - { rule: allow, port: 22 }
       - { rule: allow, from_ip: 192.168.1.0/24 }
       - { rule: deny, from_ip: 191.98.163.0/25 }
