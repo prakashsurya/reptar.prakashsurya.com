@@ -30,3 +30,8 @@ dependencies:
       - { rule: allow, port: 22 }
       - { rule: allow, from_ip: 192.168.1.0/24 }
       - { rule: deny, from_ip: 191.98.163.0/25 }
+      - { rule: deny, from_ip: 86.61.0.0/17 }
+      - { rule: deny, from_ip: 91.224.160.0/23 }
+      - { rule: deny, from_ip: 195.167.159.0/24 }
+      - { rule: deny, from_ip: 91.224.160.0/23 }
+      - { rule: deny, from_ip: 81.203.80.0/20 }
