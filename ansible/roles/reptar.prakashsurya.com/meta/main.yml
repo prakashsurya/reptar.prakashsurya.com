@@ -29,6 +29,7 @@ dependencies:
       - { rule: allow, port: 21 }
       - { rule: allow, port: 22 }
       - { rule: allow, from_ip: 192.168.1.0/24 }
+      - { rule: allow, from_ip: 172.17.0.0/16 }
       - { rule: deny, from_ip: 191.98.163.0/25 }
       - { rule: deny, from_ip: 86.61.0.0/17 }
       - { rule: deny, from_ip: 91.224.160.0/23 }
