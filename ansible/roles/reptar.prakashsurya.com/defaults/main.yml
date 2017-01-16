@@ -18,3 +18,6 @@ authorized_keys:
 
 docker_users:
   - ps
+
+weechat_users:
+  - ps

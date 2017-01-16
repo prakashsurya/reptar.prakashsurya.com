@@ -1,0 +1,71 @@
+---
+- name: install weechat packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libpam-systemd
+    - tmux
+    - weechat
+
+- name: enable systemd lingering
+  command: "loginctl enable-linger {{ item }}"
+  args:
+    creates: "/var/lib/systemd/linger/{{ item }}"
+  with_items: "{{ weechat_users }}"
+  when: weechat_users is defined
+
+- name: create user systemd config directory
+  become: yes
+  become_user: "{{ item }}"
+  file:
+    path: "~/.config/systemd/user"
+    state: directory
+    owner: "{{ item }}"
+    group: "{{ item }}"
+  with_items: "{{ weechat_users }}"
+  when: weechat_users is defined
+
+- name: add weechat systemd service for specified users
+  become: yes
+  become_user: "{{ item }}"
+  copy:
+    src: "home/user/.config/systemd/user/weechat.service"
+    dest: "~/.config/systemd/user/weechat.service"
+    owner: "{{ item }}"
+    group: "{{ item }}"
+    mode: 0644
+  with_items: "{{ weechat_users }}"
+  when: weechat_users is defined
+
+#
+# We can't simply use:
+#
+#     systemd:
+#       name: weechat
+#       state: started
+#       enabled: yes
+#       user: yes
+#
+# because that will result in the following error:
+#
+#    Failed to connect to bus: No such file or directory
+#
+# This is likely due to the XDG_RUNTIME_DIR and DBUS_SESSION_BUS_ADDRESS
+# environment variables not being set.
+#
+# To workaround this error, we explicitly enable and start the user
+# service using the following shell commands. The obvious drawback to
+# this approach is the fact that we'll run these commands whether we
+# need to or not.
+#
+- name: enable user systemd weechat service
+  become: yes
+  become_user: "{{ item }}"
+  shell: |
+    export XDG_RUNTIME_DIR="/run/user/$(id -u {{ item }})"
+    export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+    systemctl --user enable weechat
+    systemctl --user start weechat
+  with_items: "{{ weechat_users }}"
+  when: weechat_users is defined

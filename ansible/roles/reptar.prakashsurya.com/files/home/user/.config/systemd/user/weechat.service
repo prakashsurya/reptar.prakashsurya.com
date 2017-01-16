@@ -1,0 +1,15 @@
+#
+# see also: http://www.mythmon.com/posts/2015-02-15-systemd-weechat.html
+#
+
+[Unit]
+Description=Weechat Client (in tmux)
+
+[Service]
+Type=forking
+RemainAfterExit=yes
+ExecStart=/usr/bin/tmux -2 new-session -d -s weechat /usr/bin/weechat
+ExecStop=/usr/bin/tmux kill-session -t weechat
+
+[Install]
+WantedBy=default.target

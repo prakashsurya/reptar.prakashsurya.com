@@ -13,3 +13,4 @@
 - include: authorized_keys.yml # depends on users.yml
 - include: docker.yml # depends on users.yml
 - include: git_server.yml # depends on users.yml
+- include: weechat.yml # depends on users.yml
