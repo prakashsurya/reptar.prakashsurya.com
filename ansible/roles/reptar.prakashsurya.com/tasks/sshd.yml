@@ -1,0 +1,16 @@
+---
+#
+# While we use the "dev-sec.ssh-hardening" role to perform most
+# configuration changes for sshd, that role doesn't support enabling X11
+# forwarding. Thus, as a result, we have to enable that configuration
+# outside of that role; which we do here.
+#
+- name: Enable X11 forwarding
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^{{ item.key }} "
+    insertafter: "#{{ item.key }} "
+    line: "{{ item.key }} {{ item.value }}"
+  with_items:
+    - { key: "X11Forwarding", value: "yes" }
+  notify: restart sshd
