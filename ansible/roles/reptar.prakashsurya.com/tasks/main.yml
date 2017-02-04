@@ -2,6 +2,7 @@
 - include: cloudflare_ddns.yml
 - include: dns.yml
 - include: ftp_server.yml
+- include: gopass.yml
 - include: networking.yml
 - include: packer.yml
 - include: pkgs.yml
