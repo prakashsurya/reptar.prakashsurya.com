@@ -1,0 +1,8 @@
+- name: download and extract packer command
+  unarchive:
+    src: https://releases.hashicorp.com/packer/0.12.2/packer_0.12.2_linux_amd64.zip
+    dest: /usr/local/bin
+    remote_src: True
+    owner: root
+    group: root
+    mode: 0755
