@@ -1,3 +1,9 @@
+---
+- name: install ffmpeg packages
+  apt:
+    name: ffmpeg
+    state: present
+
 - name: download youtube-dl command
   get_url:
     url: https://yt-dl.org/downloads/latest/youtube-dl
