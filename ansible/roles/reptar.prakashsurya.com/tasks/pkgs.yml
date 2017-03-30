@@ -9,6 +9,7 @@
     - git
     - htop
     - lm-sensors
+    - stress
     - sysstat
     - vim
     - qemu
