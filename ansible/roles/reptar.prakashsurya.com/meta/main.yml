@@ -2,7 +2,6 @@
 dependencies:
   - role: angstwad.docker_ubuntu
     docker_opts: --storage-driver=devicemapper
-    pip_version_docker_py: 1.9.0
   - role: dev-sec.ssh-hardening
     ssh_allow_users: 'ps git'
     ssh_print_motd: true
