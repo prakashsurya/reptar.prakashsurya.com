@@ -9,7 +9,7 @@ dependencies:
     ssh_use_pam: true # required for systemd "--user" services
   - role: jnv.unattended-upgrades
     unattended_package_blacklist: []
-    unattended_automatic_reboot: true
+    unattended_automatic_reboot: false
     unattended_remove_unused_dependencies: true
   - role: tersmitten.fail2ban
     fail2ban_services:
