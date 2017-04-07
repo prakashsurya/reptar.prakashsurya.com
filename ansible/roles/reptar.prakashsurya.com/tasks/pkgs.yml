@@ -8,6 +8,7 @@
     - expect
     - git
     - htop
+    - linux-crashdump
     - lm-sensors
     - stress
     - sysstat
