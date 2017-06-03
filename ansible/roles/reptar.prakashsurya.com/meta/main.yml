@@ -2,11 +2,6 @@
 dependencies:
   - role: angstwad.docker_ubuntu
     docker_opts: --storage-driver=devicemapper
-  - role: dev-sec.ssh-hardening
-    ssh_allow_users: 'ps git'
-    ssh_print_motd: true
-    ssh_print_last_log: true
-    ssh_use_pam: true # required for systemd "--user" services
   - role: jnv.unattended-upgrades
     unattended_package_blacklist: []
     unattended_automatic_reboot: false
@@ -49,6 +44,7 @@ dependencies:
       - name: git
         system: yes
         shell: /usr/bin/git-shell
+    foundation_ssh_allow_users: 'ps git'
 
   - role: xubuntu
     xubuntu_autologin_user: steamuser

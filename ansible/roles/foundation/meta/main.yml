@@ -1,0 +1,8 @@
+---
+dependencies:
+  - role: dev-sec.ssh-hardening
+    ssh_allow_users: "{{ foundation_ssh_allow_users | default('') }}"
+    ssh_print_motd: true
+    ssh_print_last_log: true
+    ssh_use_pam: true # required for systemd "--user" services
+

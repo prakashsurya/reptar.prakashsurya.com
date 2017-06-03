@@ -5,6 +5,7 @@
       - name: ps
         system: no
         shell: /bin/bash
+    foundation_ssh_allow_users: ps
     xubuntu_autologin_user: ps
   roles:
     - foundation
