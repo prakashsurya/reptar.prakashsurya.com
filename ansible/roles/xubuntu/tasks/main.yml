@@ -10,14 +10,15 @@
     state: present
 
 - name: copy lightdm configuration file
-  copy:
-    src: etc/lightdm/lightdm.conf
+  template:
+    src: etc/lightdm/lightdm.conf.j2
     dest: /etc/lightdm/lightdm.conf
     owner: root
     group: root
     mode: 0644
   notify:
     - restart lightdm
+  when: xubuntu_autologin_user is defined
 
 - name: enable lightdm service
   service:

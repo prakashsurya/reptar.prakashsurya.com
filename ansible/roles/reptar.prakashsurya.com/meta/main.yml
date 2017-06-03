@@ -37,3 +37,18 @@ dependencies:
       - { rule: deny, from_ip: 195.167.159.0/24 }
       - { rule: deny, from_ip: 91.224.160.0/23 }
       - { rule: deny, from_ip: 81.203.80.0/20 }
+
+  - role: foundation
+    foundation_users:
+      - name: ps
+        system: no
+        shell: /bin/bash
+      - name: steamuser
+        system: no
+        shell: /bin/bash
+      - name: git
+        system: yes
+        shell: /usr/bin/git-shell
+
+  - role: xubuntu
+    xubuntu_autologin_user: steamuser

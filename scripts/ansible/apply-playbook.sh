@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 TOP=$(git rev-parse --show-toplevel 2>/dev/null)
 
@@ -12,4 +12,9 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-ansible-playbook -i $TOP/ansible/inventory $TOP/ansible/playbook.yml
+if [[ "$1" != "hefer" ]] && [[ "$1" != "reptar" ]]; then
+	echo "Must specify which playbook: 'hefer' or 'reptar'"
+	exit 1
+fi
+
+ansible-playbook -i $TOP/ansible/inventory $TOP/ansible/playbook-$1.yml

@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  vars:
+    foundation_users:
+      - name: ps
+        system: no
+        shell: /bin/bash
+    xubuntu_autologin_user: ps
+  roles:
+    - foundation
+    - xubuntu

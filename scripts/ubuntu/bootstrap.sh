@@ -24,12 +24,4 @@ apt-get install -y openssh-server
 apt-get install -y software-properties-common
 apt-add-repository -y ppa:ansible/ansible
 apt-get update
-
-#
-# The Ansible playbooks and roles assume Ansible 2.0 or greater is used
-# to execute the playbooks. Additionally, only a single version of
-# Ansible has been tested, so we pin the package to this specific
-# version to try and avoid any potential issues with new versions of
-# Ansible (attempting to future-proof the configuration).
-#
-apt-get install -y ansible=2.2.0.0-1ppa~xenial
+apt-get install -y ansible

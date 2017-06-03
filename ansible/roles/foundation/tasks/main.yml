@@ -3,7 +3,8 @@
   group:
     name: "{{ item.name }}"
     system: "{{ item.system }}"
-  with_items: "{{ users }}"
+  with_items: "{{ foundation_users }}"
+  when: foundation_users is defined
 
 - name: create users
   user:
@@ -12,7 +13,8 @@
     shell: "{{ item.shell }}"
     home: "/home/{{ item.name }}"
     system: "{{ item.system }}"
-  with_items: "{{ users }}"
+  with_items: "{{ foundation_users }}"
+  when: foundation_users is defined
 
 - name: set home directory permissions
   file:
@@ -21,4 +23,5 @@
     owner: "{{ item.name }}"
     group: "{{ item.name }}"
     mode: 0755
-  with_items: "{{ users }}"
+  with_items: "{{ foundation_users }}"
+  when: foundation_users is defined
