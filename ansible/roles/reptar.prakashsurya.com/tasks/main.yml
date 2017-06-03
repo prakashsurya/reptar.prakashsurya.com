@@ -1,5 +1,4 @@
 ---
-- include: authorized_keys.yml
 - include: cloudflare_ddns.yml
 - include: dns.yml
 - include: docker.yml

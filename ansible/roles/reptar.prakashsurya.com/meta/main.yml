@@ -38,12 +38,14 @@ dependencies:
       - name: ps
         system: no
         shell: /bin/bash
+        key: https://github.com/prakashsurya.keys
       - name: steamuser
         system: no
         shell: /bin/bash
       - name: git
         system: yes
         shell: /usr/bin/git-shell
+        key: https://github.com/prakashsurya.keys
     foundation_ssh_allow_users: 'ps git'
 
   - role: xubuntu
