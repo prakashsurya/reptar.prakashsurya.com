@@ -11,4 +11,5 @@
     xubuntu_autologin_user: ps
   roles:
     - foundation
+    - steam
     - xubuntu

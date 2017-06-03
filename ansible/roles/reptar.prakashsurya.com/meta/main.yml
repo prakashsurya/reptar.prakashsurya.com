@@ -32,7 +32,6 @@ dependencies:
       - { rule: deny, from_ip: 195.167.159.0/24 }
       - { rule: deny, from_ip: 91.224.160.0/23 }
       - { rule: deny, from_ip: 81.203.80.0/20 }
-
   - role: foundation
     foundation_users:
       - name: ps
@@ -47,6 +46,6 @@ dependencies:
         shell: /usr/bin/git-shell
         key: https://github.com/prakashsurya.keys
     foundation_ssh_allow_users: 'ps git'
-
+  - role: steam
   - role: xubuntu
     xubuntu_autologin_user: steamuser

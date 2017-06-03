@@ -1,10 +1,10 @@
 ---
 - name: enable multiverse repository
   apt_repository:
-    repo: "{{item}}"
+    repo: "{{ item }}"
   with_items:
-    - 'deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
-    - 'deb-src http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} multiverse'
+    - 'deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} multiverse'
+    - 'deb-src http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release }} multiverse'
   register: multiverse
 
 - name: update apt cache
