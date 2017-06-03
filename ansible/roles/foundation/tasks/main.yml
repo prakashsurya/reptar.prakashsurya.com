@@ -1,12 +1,12 @@
 ---
-- name: create user groups
+- name: configure user groups
   group:
     name: "{{ item.name }}"
     system: "{{ item.system }}"
   with_items: "{{ foundation_users }}"
   when: foundation_users is defined
 
-- name: create users
+- name: configure users
   user:
     name: "{{ item.name }}"
     group: "{{ item.name }}"
@@ -16,7 +16,7 @@
   with_items: "{{ foundation_users }}"
   when: foundation_users is defined
 
-- name: set home directory permissions
+- name: configure home directory permissions
   file:
     path: "/home/{{ item.name }}"
     state: directory
@@ -32,3 +32,8 @@
     user: "{{ item.name }}"
   with_items: "{{ foundation_users }}"
   when: foundation_users is defined
+
+- name: configure hostname
+  hostname:
+    name: "{{ foundation_hostname }}"
+  when: foundation_hostname is defined

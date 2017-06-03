@@ -1,12 +1,13 @@
 ---
 - hosts: localhost
   vars:
+    foundation_hostname: hefer
+    foundation_ssh_allow_users: ps
     foundation_users:
       - name: ps
         system: no
         shell: /bin/bash
         key: https://github.com/prakashsurya.keys
-    foundation_ssh_allow_users: ps
     xubuntu_autologin_user: ps
   roles:
     - foundation
