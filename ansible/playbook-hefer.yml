@@ -11,5 +11,6 @@
     xubuntu_autologin_user: ps
   roles:
     - foundation
+    - google-chrome
     - steam
     - xubuntu
