@@ -61,7 +61,6 @@
     state: present
   with_items:
     - apps
-    - apps/couchpotato
     - apps/nzbget
     - apps/plex
     - apps/radarr
@@ -80,7 +79,6 @@
     group: users
   with_items:
     - apps
-    - apps/couchpotato
     - apps/nzbget
     - apps/plex
     - apps/radarr
@@ -142,24 +140,6 @@
       - "/etc/localtime:/etc/localtime:ro"
     env:
       VIRTUAL_HOST: radarr.home.prakashsurya.com
-      PUID: 993
-      PGID: 100
-
-- name: create and run couchpotato docker container
-  docker_container:
-    name: couchpotato
-    image: linuxserver/couchpotato
-    state: started
-    restart_policy: always
-    ports:
-      - "5050:5050"
-    volumes:
-      - "/etc/localtime:/etc/localtime"
-      - "/opt/docker/downloads:/downloads"
-      - "/opt/docker/movies:/movies"
-      - "/opt/docker/apps/couchpotato:/config"
-    env:
-      VIRTUAL_HOST: couchpotato.home.prakashsurya.com
       PUID: 993
       PGID: 100
 
