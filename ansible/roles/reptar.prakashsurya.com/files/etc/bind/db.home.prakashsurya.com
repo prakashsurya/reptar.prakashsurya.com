@@ -16,5 +16,6 @@ reptar.home.prakashsurya.com.           IN      A       192.168.1.2
 
 nzbget.home.prakashsurya.com.           IN      CNAME   reptar.home.prakashsurya.com.
 sonarr.home.prakashsurya.com.           IN      CNAME   reptar.home.prakashsurya.com.
+radarr.home.prakashsurya.com.           IN      CNAME   reptar.home.prakashsurya.com.
 couchpotato.home.prakashsurya.com.      IN      CNAME   reptar.home.prakashsurya.com.
 plex.home.prakashsurya.com.             IN      CNAME   reptar.home.prakashsurya.com.
