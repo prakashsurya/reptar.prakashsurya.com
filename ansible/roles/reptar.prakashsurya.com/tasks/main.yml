@@ -9,7 +9,6 @@
 - include: packer.yml
 - include: pkgs.yml
 - include: sshd.yml
-- include: steam.yml
 - include: weechat.yml
 - include: x11vnc.yml
 - include: youtube_dl.yml
