@@ -3,3 +3,4 @@ ansible/roles/dev-sec.ssh-hardening
 ansible/roles/franklinkim.ufw
 ansible/roles/jnv.unattended-upgrades
 ansible/roles/tersmitten.fail2ban
+ansible/roles/cmprescott.chrome
