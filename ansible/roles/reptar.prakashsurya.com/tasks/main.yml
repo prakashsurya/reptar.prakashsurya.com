@@ -1,5 +1,5 @@
 ---
-- include: cloudflare_ddns.yml
+- include: cloudflare-ddns.yml
 - include: dns.yml
 - include: docker.yml
 - include: ftp_server.yml

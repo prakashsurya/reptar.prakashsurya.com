@@ -1,0 +1,28 @@
+---
+- name: checkout cloudflare-ddns repository
+  git:
+    repo: https://github.com/Ethaligan/cloudflare-ddns.git
+    dest: /opt/cloudflare-ddns
+    version: master
+    update: yes
+
+#
+# To avoid storing secret credentials in the git repository, and avoid
+# the extra complexity of using something like Ansible vault, we only
+# store the configuration template file in the repository. The real
+# configuration file will have to be manually created and installed onto
+# the system, and this task will verify that the file exists.
+#
+- name: ensure real config file exists
+  file:
+    path: /opt/cloudflare-ddns/zones/prakashsurya.com.yml
+    state: file
+    owner: root
+    group: root
+    mode: 0644
+
+- name: add cronjob to update DNS
+  cron:
+    name: update dynamic dns
+    special_time: hourly
+    job: python /opt/cloudflare-ddns/cloudflare-ddns.py -z prakashsurya.com
