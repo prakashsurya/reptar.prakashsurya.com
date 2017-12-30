@@ -2,8 +2,8 @@
 auto lo
 iface lo inet loopback
 
-auto enp9s0
-iface enp9s0 inet static
+auto enp8s0
+iface enp8s0 inet static
     address 192.168.1.2
     netmask 255.255.255.0
     broadcast 192.168.1.255
