@@ -93,6 +93,7 @@
   docker_container:
     name: nzbget
     image: linuxserver/nzbget
+    pull: true
     state: started
     restart_policy: always
     ports:
@@ -109,6 +110,7 @@
   docker_container:
     name: sonarr
     image: linuxserver/sonarr
+    pull: true
     state: started
     restart_policy: always
     ports:
@@ -128,6 +130,7 @@
   docker_container:
     name: radarr
     image: linuxserver/radarr
+    pull: true
     state: started
     restart_policy: always
     ports:
@@ -147,6 +150,7 @@
   docker_container:
     name: nginx-proxy
     image: jwilder/nginx-proxy
+    pull: true
     state: started
     restart_policy: always
     ports:
@@ -163,6 +167,7 @@
   docker_container:
     name: plex
     image: linuxserver/plex
+    pull: true
     state: started
     restart_policy: always
     network_mode: host
