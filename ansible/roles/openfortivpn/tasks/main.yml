@@ -1,0 +1,47 @@
+---
+- name: install build dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - autoconf
+    - build-essential
+    - git
+    - libssl-dev
+    - pkg-config
+
+- name: create /opt directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt
+    - /opt/openfortivpn
+    - /opt/openfortivpn/src
+
+- name: checkout source code
+  git:
+    repo: https://github.com/adrienverge/openfortivpn.git
+    dest: /opt/openfortivpn/src
+    version: v1.7.0
+    update: no
+  register: checkout
+
+- name: perform build and installation
+  shell: "{{ item }}"
+  args:
+    chdir: /opt/openfortivpn/src
+  with_items:
+    - ./autogen.sh
+    - ./configure --prefix=/opt/openfortivpn
+    - make
+    - make install
+  when: checkout.changed
+
+- name: copy systemd service file
+  copy:
+    src: etc/systemd/system/openfortivpn.service
+    dest: /etc/systemd/system/openfortivpn.service
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,14 @@
+---
+dependencies:
+  - role: foundation
+    foundation_hostname: filbert
+    foundation_ssh_allow_users: ps
+    foundation_users:
+      - name: ps
+        system: no
+        shell: /bin/bash
+        key: https://github.com/prakashsurya.keys
+  - role: google-chrome
+  - role: openfortivpn
+  - role: xubuntu
+    xubuntu_autologin_user: ps

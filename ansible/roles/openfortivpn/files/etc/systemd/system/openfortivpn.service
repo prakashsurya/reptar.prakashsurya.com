@@ -1,0 +1,9 @@
+[Unit]
+Description = Client for PPP+SSL VPN tunnel services
+
+[Service]
+ExecStart = /opt/openfortivpn/bin/openfortivpn -c /opt/openfortivpn/etc/openfortivpn/config
+Type = simple
+
+[Install]
+WantedBy = multi-user.target

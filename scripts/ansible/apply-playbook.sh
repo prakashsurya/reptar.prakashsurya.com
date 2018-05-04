@@ -12,8 +12,8 @@ if [[ $EUID -ne 0 ]]; then
 	exit 1
 fi
 
-if [[ "$1" != "hefer" ]] && [[ "$1" != "reptar" ]]; then
-	echo "Must specify which playbook: 'hefer' or 'reptar'"
+if [[ "$1" != "filbert" ]] && [[ "$1" != "hefer" ]] && [[ "$1" != "reptar" ]]; then
+	echo "Must specify which playbook: 'filbert' or 'hefer' or 'reptar'"
 	exit 1
 fi
 
