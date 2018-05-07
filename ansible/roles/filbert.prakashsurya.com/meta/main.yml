@@ -13,3 +13,4 @@ dependencies:
   - role: openfortivpn
   - role: xubuntu
     xubuntu_autologin_user: ps
+  - role: zoom
