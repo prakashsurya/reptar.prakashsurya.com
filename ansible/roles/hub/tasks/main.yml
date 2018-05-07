@@ -1,0 +1,35 @@
+---
+- name: install build dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - golang-go
+    - make
+    - ruby-bundler
+    - ruby-full
+
+- name: create /opt directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt
+    - /opt/hub
+    - /opt/hub/src
+
+- name: checkout source code
+  git:
+    repo: https://github.com/github/hub
+    dest: /opt/hub/src
+    version: v2.3.0-pre10
+    update: no
+  register: checkout
+
+- name: perform build and installation
+  shell: "{{ item }}"
+  args:
+    chdir: /opt/hub/src
+  with_items:
+    - make install prefix=/opt/hub
+  when: checkout.changed

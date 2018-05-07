@@ -9,6 +9,7 @@ dependencies:
         shell: /bin/bash
         key: https://github.com/prakashsurya.keys
   - role: google-chrome
+  - role: hub
   - role: openfortivpn
   - role: xubuntu
     xubuntu_autologin_user: ps
