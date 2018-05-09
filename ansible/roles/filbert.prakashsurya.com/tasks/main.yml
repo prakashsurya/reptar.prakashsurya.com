@@ -3,6 +3,7 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - docker.io
     - openjdk-8-jdk
     - openjdk-8-jre
     - rdesktop
