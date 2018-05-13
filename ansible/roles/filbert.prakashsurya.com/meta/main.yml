@@ -1,5 +1,9 @@
 ---
 dependencies:
+  - role: jnv.unattended-upgrades
+    unattended_package_blacklist: []
+    unattended_automatic_reboot: false
+    unattended_remove_unused_dependencies: true
   - role: foundation
     foundation_hostname: filbert
     foundation_ssh_allow_users: ps
