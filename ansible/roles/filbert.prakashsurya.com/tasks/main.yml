@@ -14,7 +14,7 @@
 #
 # See also: https://github.com/pyenv/pyenv/wiki/common-build-problems
 #
-- name: install pyenv build dependencies
+- name: install pyenv dependencies
   apt:
     name: "{{ item }}"
     state: present
@@ -33,3 +33,18 @@
     - libncursesw5-dev
     - xz-utils
     - tk-dev
+
+- name: install gopass dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gnupg
+    - git
+    - rng-tools
+
+- name: install gopass
+  apt:
+    deb:
+      "https://github.com/justwatchcom/gopass/releases/download/\
+       v1.7.0-alpha.1/gopass-1.7.0-alpha.1-linux-amd64.deb"
