@@ -49,3 +49,22 @@
     deb:
       "https://github.com/justwatchcom/gopass/releases/download/\
        v1.7.0-alpha.1/gopass-1.7.0-alpha.1-linux-amd64.deb"
+
+- name: add drive apt key
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: 7086E9CC7EC3233B
+
+- name: add drive apt repository
+  apt_repository:
+    repo: "deb http://shaggytwodope.github.io/repo ./"
+    state: present
+    filename: google-drive-cli
+
+- name: install drive packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - dirmngr
+    - drive
