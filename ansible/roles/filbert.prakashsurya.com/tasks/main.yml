@@ -10,7 +10,7 @@
     - rdesktop
     - tmux
     - todotxt-cli
-    - vim
+    - vim-nox
 
 #
 # See also: https://github.com/pyenv/pyenv/wiki/common-build-problems
