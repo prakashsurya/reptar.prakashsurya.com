@@ -9,6 +9,7 @@
     - openjdk-8-jre
     - rdesktop
     - tmux
+    - todotxt-cli
     - vim
 
 #
