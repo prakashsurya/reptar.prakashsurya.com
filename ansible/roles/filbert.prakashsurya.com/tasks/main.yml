@@ -3,7 +3,9 @@
     name: "{{ item }}"
     state: present
   with_items:
+    - cscope
     - docker.io
+    - exuberant-ctags
     - nixnote2
     - openjdk-8-jdk
     - openjdk-8-jre
