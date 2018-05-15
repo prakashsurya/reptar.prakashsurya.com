@@ -1,4 +1,4 @@
-- name: install miscellaneous packages
+- name: install miscellaneous apt packages
   apt:
     name: "{{ item }}"
     state: present
@@ -11,6 +11,18 @@
     - tmux
     - todotxt-cli
     - vim-nox
+
+- name: install pip dependencies
+  apt:
+    name: python-pip
+    state: present
+
+- name: install miscellaneous pip packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - jrnl
 
 #
 # See also: https://github.com/pyenv/pyenv/wiki/common-build-problems
