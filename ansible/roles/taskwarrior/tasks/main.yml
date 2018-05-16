@@ -1,0 +1,53 @@
+---
+- name: install taskwarrior apt packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bugwarrior
+    - taskwarrior
+
+- name: install pip
+  apt:
+    name: python-pip
+    state: present
+
+- name: install taskwarrior pip packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - jira
+
+- name: install taskopen dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - libjson-perl
+
+- name: create /opt directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt
+    - /opt/taskopen
+    - /opt/taskopen/src
+
+- name: checkout source code
+  git:
+    repo: https://github.com/ValiValpas/taskopen.git
+    dest: /opt/taskopen/src
+    version: v1.1.3
+    update: no
+  register: checkout
+
+- name: perform build and installation
+  shell: "{{ item }}"
+  args:
+    chdir: /opt/taskopen/src
+  with_items:
+    - make SHELL=/bin/bash PREFIX=/opt/taskopen
+    - make SHELL=/bin/bash PREFIX=/opt/taskopen install
+  when: checkout.changed

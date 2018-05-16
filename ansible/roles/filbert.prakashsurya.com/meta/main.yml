@@ -15,6 +15,7 @@ dependencies:
   - role: google-chrome
   - role: hub
   - role: openfortivpn
+  - role: taskwarrior
   - role: xubuntu
     xubuntu_autologin_user: ps
   - role: zoom
