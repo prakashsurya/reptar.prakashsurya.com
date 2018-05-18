@@ -4,21 +4,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - bugwarrior
     - taskwarrior
     - timewarrior
-
-- name: install pip
-  apt:
-    name: python-pip
-    state: present
-
-- name: install taskwarrior pip packages
-  pip:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - jira
 
 - name: install taskopen dependencies
   apt:
@@ -27,7 +14,7 @@
   with_items:
     - libjson-perl
 
-- name: create /opt directories
+- name: create taskopen /opt directories
   file:
     path: "{{ item }}"
     state: directory
@@ -36,7 +23,7 @@
     - /opt/taskopen
     - /opt/taskopen/src
 
-- name: checkout source code
+- name: checkout taskopen source code
   git:
     repo: https://github.com/ValiValpas/taskopen.git
     dest: /opt/taskopen/src
@@ -44,7 +31,7 @@
     update: no
   register: checkout
 
-- name: perform build and installation
+- name: perform taskopen build and installation
   shell: "{{ item }}"
   args:
     chdir: /opt/taskopen/src
@@ -52,3 +39,41 @@
     - make SHELL=/bin/bash PREFIX=/opt/taskopen
     - make SHELL=/bin/bash PREFIX=/opt/taskopen install
   when: checkout.changed
+
+- name: create bugwarrior /opt directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - /opt
+    - /opt/bugwarrior
+    - /opt/bugwarrior/src
+
+- name: checkout bugwarrior source code
+  git:
+    repo: https://github.com/ralphbean/bugwarrior.git
+    dest: /opt/bugwarrior/src
+    version: develop
+    update: no
+  register: checkout
+
+- name: perform bugwarrior build and installation
+  shell: "{{ item }}"
+  args:
+    chdir: /opt/bugwarrior/src
+  with_items:
+    - python setup.py install
+  when: checkout.changed
+
+- name: install pip
+  apt:
+    name: python-pip
+    state: present
+
+- name: install bugwarrior pip packages
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - bugwarrior[gmail]
+    - bugwarrior[keyring]
