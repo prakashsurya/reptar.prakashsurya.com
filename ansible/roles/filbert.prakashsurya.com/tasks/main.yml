@@ -10,6 +10,7 @@
     - openjdk-8-jdk
     - openjdk-8-jre
     - rdesktop
+    - rsync
     - tmux
     - todotxt-cli
     - vim-nox
