@@ -9,6 +9,7 @@
     - nixnote2
     - openjdk-8-jdk
     - openjdk-8-jre
+    - pandoc
     - rdesktop
     - rsync
     - tmux
