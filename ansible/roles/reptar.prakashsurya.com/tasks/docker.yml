@@ -61,6 +61,7 @@
     state: present
   with_items:
     - apps
+    - apps/lidarr
     - apps/nzbget
     - apps/plex
     - apps/radarr
@@ -68,6 +69,7 @@
     - downloads
     - import
     - movies
+    - music
     - tvshows
     - youtube
 
@@ -79,6 +81,7 @@
     group: users
   with_items:
     - apps
+    - apps/lidarr
     - apps/nzbget
     - apps/plex
     - apps/radarr
@@ -86,8 +89,29 @@
     - downloads
     - import
     - movies
+    - music
     - tvshows
     - youtube
+
+- name: create and run lidarr docker container
+  docker_container:
+    name: lidarr
+    image: linuxserver/lidarr
+    pull: true
+    state: started
+    restart_policy: always
+    ports:
+      - "8686:8686"
+    volumes:
+      - "/opt/docker/downloads:/downloads"
+      - "/opt/docker/import:/import"
+      - "/opt/docker/music:/music"
+      - "/opt/docker/apps/lidarr:/config"
+      - "/etc/localtime:/etc/localtime:ro"
+    env:
+      VIRTUAL_HOST: lidarr.home.prakashsurya.com
+      PUID: 993
+      PGID: 100
 
 - name: create and run nzbget docker container
   docker_container:
