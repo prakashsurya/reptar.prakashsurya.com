@@ -16,6 +16,7 @@
     - tmux
     - todotxt-cli
     - vim-nox
+    - xdotool
 
 - name: install pip dependencies
   apt:
