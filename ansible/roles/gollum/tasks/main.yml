@@ -1,0 +1,23 @@
+---
+- name: install build dependencies
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - ruby
+    - ruby-dev
+    - make
+    - zlib1g-dev
+    - libicu-dev
+    - build-essential
+    - git
+    - cmake
+
+- name: install gem packages
+  gem:
+    name: "{{ item }}"
+    state: present
+    user_install: no
+  with_items:
+    - gollum
+    - github-markdown

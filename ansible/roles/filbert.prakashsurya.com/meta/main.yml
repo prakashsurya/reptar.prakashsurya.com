@@ -12,6 +12,7 @@ dependencies:
         system: no
         shell: /bin/bash
         key: https://github.com/prakashsurya.keys
+  - role: gollum
   - role: google-chrome
   - role: hub
   - role: openfortivpn
