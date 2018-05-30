@@ -64,8 +64,8 @@
 - name: install gopass
   apt:
     deb:
-      "https://github.com/justwatchcom/gopass/releases/download/\
-       v1.7.0-alpha.1/gopass-1.7.0-alpha.1-linux-amd64.deb"
+      "https://github.com/gopasspw/gopass/releases/download/\
+       v1.7.2/gopass-1.7.2-linux-amd64.deb"
 
 - name: add drive apt key
   apt_key:
