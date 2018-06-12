@@ -78,3 +78,21 @@
   with_items:
     - bugwarrior[gmail]
     - bugwarrior[keyring]
+
+#
+# We need to install the pip3 version of the taskwiki module, because
+# the vim executable provided by Ubuntu only has python3 support. If we
+# installed the pip2 verison of the module, vim wouldn't find it.
+#
+- name: install pip3
+  apt:
+    name: python3-pip
+    state: present
+
+- name: install taskwiki pip3 packages
+  pip:
+    name: "{{ item }}"
+    state: present
+    executable: pip3
+  with_items:
+    - 'git+git://github.com/tbabej/tasklib@develop'
