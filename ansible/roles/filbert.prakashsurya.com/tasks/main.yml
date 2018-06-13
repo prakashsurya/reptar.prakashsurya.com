@@ -7,6 +7,7 @@
     - docker.io
     - exuberant-ctags
     - gist
+    - hugo
     - nixnote2
     - openjdk-8-jdk
     - openjdk-8-jre
