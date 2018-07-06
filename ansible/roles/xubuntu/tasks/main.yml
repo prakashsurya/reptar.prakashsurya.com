@@ -1,8 +1,11 @@
 ---
 - name: install xubuntu package
   apt:
-    name: xubuntu-desktop
+    name: "{{ item }}"
     state: present
+  with_items:
+    - xubuntu-desktop
+    - xfce4-clipman
 
 - name: install lightdm package
   apt:
