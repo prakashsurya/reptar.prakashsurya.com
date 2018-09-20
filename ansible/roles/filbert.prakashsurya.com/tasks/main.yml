@@ -4,6 +4,7 @@
     state: present
   with_items:
     - cscope
+    - dnsutils
     - docker.io
     - exuberant-ctags
     - gist
